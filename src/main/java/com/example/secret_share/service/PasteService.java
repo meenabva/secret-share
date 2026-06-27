@@ -26,7 +26,7 @@ public class PasteService {
     private final RedisTemplate<String, String> redisTemplate;
 
     @Value("${app.base-url}")
-    private static String url;
+    private String url;
 
     // ── CREATE ────────────────────────────────────────────────
     public PasteResponse createPaste(CreatePasteRequest req) {

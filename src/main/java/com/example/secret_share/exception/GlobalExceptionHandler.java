@@ -29,6 +29,14 @@ public class GlobalExceptionHandler {
                 .body(new ErrorResponse("VALIDATION_ERROR", msg));
     }
 
+    @ExceptionHandler(TooManyRequestsException.class)
+    public  ResponseEntity<ErrorResponse> handleTooManyRequestsException(TooManyRequestsException ex){
+        String msg = ex.getMessage();
+        return ResponseEntity.status(429)
+                .header("Retry-After", "3600")
+                .body(new ErrorResponse("TOO_MANY_REQUESTS", msg));
+    }
+
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorResponse> handleGeneric(Exception ex) {
         log.error("Unhandled exception", ex);
